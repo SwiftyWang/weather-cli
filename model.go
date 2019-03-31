@@ -1,34 +1,58 @@
 package main
 
-// 响应
 type Response struct {
-	Status   int    `json:"status"`
-	CityName string `json:"city"`
-	Data     Data   `json:"data"`
-	Date     string `json:"date"`
-	Message  string `json:"message"`
-	Count    int    `json:"count"`
+	Time     string `json:"time"`
+	CityInfo struct {
+		City       string `json:"city"`
+		CityID     string `json:"cityId"`
+		Parent     string `json:"parent"`
+		UpdateTime string `json:"updateTime"`
+	} `json:"cityInfo"`
+	Date    string `json:"date"`
+	Message string `json:"message"`
+	Status  int    `json:"status"`
+	Data    struct {
+		Shidu     string  `json:"shidu"`
+		Pm25      float64 `json:"pm25"`
+		Pm10      float64 `json:"pm10"`
+		Quality   string  `json:"quality"`
+		Wendu     string  `json:"wendu"`
+		Ganmao    string  `json:"ganmao"`
+		Yesterday struct {
+			Date    string  `json:"date"`
+			Sunrise string  `json:"sunrise"`
+			High    string  `json:"high"`
+			Low     string  `json:"low"`
+			Sunset  string  `json:"sunset"`
+			Aqi     float64 `json:"aqi"`
+			Ymd     string  `json:"ymd"`
+			Week    string  `json:"week"`
+			Fx      string  `json:"fx"`
+			Fl      string  `json:"fl"`
+			Type    string  `json:"type"`
+			Notice  string  `json:"notice"`
+		} `json:"yesterday"`
+		Forecast []struct {
+			Date    string  `json:"date"`
+			Sunrise string  `json:"sunrise"`
+			High    string  `json:"high"`
+			Low     string  `json:"low"`
+			Sunset  string  `json:"sunset"`
+			Aqi     float64 `json:"aqi,omitempty"`
+			Ymd     string  `json:"ymd"`
+			Week    string  `json:"week"`
+			Fx      string  `json:"fx"`
+			Fl      string  `json:"fl"`
+			Type    string  `json:"type"`
+			Notice  string  `json:"notice"`
+		} `json:"forecast"`
+	} `json:"data"`
 }
 
-// 响应数据
-type Data struct {
-	ShiDu     string `json:"shidu"`
-	Quality   string `json:"quality"`
-	Ganmao    string `json:"ganmao"`
-	Yesterday Day    `json:"yesterday"`
-	Forecast  []Day  `json:"forecast"`
-}
-
-// 某一天的数据
-type Day struct {
-	Date    string  `json:"date"`
-	Sunrise string  `json:"sunrise"`
-	High    string  `json:"high"`
-	Low     string  `json:"low"`
-	Sunset  string  `json:"sunset"`
-	Aqi     float32 `json:"aqi"`
-	Fx      string  `json:"fx"`
-	Fl      string  `json:"fl"`
-	Type    string  `json:"type"`
-	Notice  string  `json:"notice"`
+type Cities []struct {
+	ID       int    `json:"_id"`
+	ID2      int    `json:"id"`
+	Pid      int    `json:"pid"`
+	CityCode string `json:"city_code"`
+	CityName string `json:"city_name"`
 }
